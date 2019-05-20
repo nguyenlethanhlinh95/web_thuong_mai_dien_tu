@@ -27,13 +27,25 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+//    protected $redirectTo = '/home';
+    //protected $redirectTo = '/admin';
+    public function redirectTo()
+    {
+        $user = auth()->user();
+        if ($user->admin == 1) {
+            return 'admin/';
+        } else if ($user->admin == 0) {
+            return '/';
+        } else {
+            return '/login';
+        }
+    }
 
     protected function home()
     {
         // User role
-//        $role = Auth::user()->admin;
-//
+        $role = Auth::user()->admin;
+        echo '234' .$role;
 //        switch ($role)
 //        {
 //            case 0:
@@ -46,7 +58,7 @@ class LoginController extends Controller
 //                return '/login'; // redirect to login page
 //                break;
 //        }
-        return view('front.pages.home');
+//        return view('front.pages.home');
     }
 
     /**
@@ -64,4 +76,12 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    //login
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    //login post
 }

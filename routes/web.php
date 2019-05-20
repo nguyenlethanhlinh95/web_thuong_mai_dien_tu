@@ -34,3 +34,14 @@ Route::get('/shop','HomeController@shop');
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+ * admin
+ * */
+Route::group(['prefix' => 'admin','middleware'=>['auth','admin']],
+    function () {
+        Route::get('/', function () {
+            return view('admin.pages.index');
+        })->name('admin.index');
+ }); // end route group
+
