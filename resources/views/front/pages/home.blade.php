@@ -4,7 +4,9 @@
 <section>
     <div class="container">
         <div class="row">
-            @include('front.layout.partials.sidebar')
+            <div class="col-sm-3">
+                @include('front.layout.partials.sidebar')
+            </div>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Features Items</h2>

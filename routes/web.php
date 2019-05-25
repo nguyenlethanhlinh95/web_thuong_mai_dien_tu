@@ -17,7 +17,7 @@ Route::get('/', function (){
 
 Route::get('/about', function (){
     return view('front.pages.about');
-});
+})->name('about');
 
 Route::get('/contact', function (){
     return view('front.pages.contact');
@@ -26,7 +26,11 @@ Route::get('/contact', function (){
 /*
  * Route Shop
  * */
-Route::get('/shop','HomeController@shop');
+Route::get('/shop','HomeController@shop')->name('shop');
+Route::get('/products','HomeController@shop');
+Route::get('/product_details/{id}', 'HomeController@product_details')->name('product_detail');
+
+Route::get('/cart/addItem/{id}', 'CartController@addItem')->name('cart_add');
 
 /*
  * End Route Shop
@@ -43,5 +47,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','admin']],
         Route::get('/', function () {
             return view('admin.pages.index');
         })->name('admin.index');
+
+        Route::resource('product','ProductsController');
+        Route::resource('category','CategoriesController');
  }); // end route group
 
